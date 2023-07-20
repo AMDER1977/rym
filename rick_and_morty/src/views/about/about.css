@@ -1,0 +1,13 @@
+.aboutMe {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  border-top: solid #39ff14;
+  border-bottom: solid #39ff14 1px;
+  padding: 5px, 0px;
+  color: #39ff14;
+  font-size: 20px;
+}
