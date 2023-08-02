@@ -28,14 +28,13 @@ function App() {
     try {
       const { email, password } = userData;
       const URL = "http://localhost:3001/rickandmorty/login/";
-      const { data } = await axios(
-        URL + `?email=${email}&password=${password}`
-      );
+      const query = `?email=${email}&password=${password}`;
+      const { data } = await axios(URL + query);
       const { access } = data;
       setAccess(data);
       access && navigate("/home");
     } catch (error) {
-      console.log(error);
+      return { error: error.message };
     }
   }
   useEffect(() => {

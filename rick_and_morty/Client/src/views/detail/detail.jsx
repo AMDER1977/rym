@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./detail.css";
+
 function Detail() {
   const { id } = useParams();
   const [character, setCharacter] = useState({});
@@ -42,11 +43,11 @@ function Detail() {
         </div>
         <div>
           <h3>Origin:</h3>
-          <p>{character.origin?.name}</p>
+          <p>{character.origin}</p>
         </div>
         <div>
           <h3>Location:</h3>
-          <p>{character.location?.name}</p>
+          <p>{character?.location}</p>
         </div>
       </div>
     </div>
