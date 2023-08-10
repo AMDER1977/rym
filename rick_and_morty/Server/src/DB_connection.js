@@ -24,7 +24,7 @@ FavoriteModel(sequelize);
 // ¡Relaciona tus modelos aquí abajo!
 const { User, Favorite } = sequelize.models;
 
-//?relacion de muchos a muchos---tabla intermedia
+//!relacion de muchos a muchos---tabla intermedia
 
 User.belongsToMany(Favorite, { through: "user_favorite", timestamps: false });
 Favorite.belongsToMany(User, { through: "user_favorite", timestamps: false });
