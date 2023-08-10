@@ -2,7 +2,7 @@ require("dotenv").config(); //.env
 const { Sequelize } = require("sequelize");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env; //!enviroment---> variables de entorno de ejecucion.
 
-const UsersModels = require("./models/User");
+const UserModel = require("./models/User");
 const FavoriteModel = require("./models/Favorite");
 
 // EJERCICIO 03
@@ -11,23 +11,23 @@ const FavoriteModel = require("./models/Favorite");
 
 // URL ----> postgres://DB_USER:DB_PASSWORD@DB_HOST/rickandmorty
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@ ${DB_HOST}/rickandmorty`,
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/rickandmorty`,
   { logging: false, native: false }
 );
 
 // EJERCICIO 05
 // Debajo de este comentario puedes ejecutar la función de los modelos.
-UsersModels(sequelize);
-//
+UserModel(sequelize);
 FavoriteModel(sequelize);
-//
 
 // Ejercicio 06
 // ¡Relaciona tus modelos aquí abajo!
 const { User, Favorite } = sequelize.models;
 
-User.belongsToMany(Favorite, { through: "user_favorite" });
-Favorite.belongsToMany(User, { through: "user_favorite" });
+//?relacion de muchos a muchos---tabla intermedia
+
+User.belongsToMany(Favorite, { through: "user_favorite", timestamps: false });
+Favorite.belongsToMany(User, { through: "user_favorite", timestamps: false });
 
 module.exports = {
   User,

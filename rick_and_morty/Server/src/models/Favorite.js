@@ -18,17 +18,17 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
 
+      species: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
       gender: {
         type: DataTypes.ENUM("Female", "Male", "Genderless", "unknown"),
         allowNull: false,
       },
 
       origin: {
-        type: DataTypes.JSON,
-        allowNull: false,
-      },
-
-      species: {
         type: DataTypes.STRING,
         allowNull: false,
       },

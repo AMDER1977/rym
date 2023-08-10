@@ -1,12 +1,16 @@
 const { DataTypes } = require("sequelize");
 
+//?sequelize es la instancia que recibe
+
 module.exports = (sequelize) => {
+  //todo: a partir de esa instancia definimos el modelo
   sequelize.define(
     "User",
     {
+      //!atributos
       id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        type: DataTypes.INTEGER, //*tipo de datos
+        allowNull: false, //*constraist
         primaryKey: true,
       },
       email: {
@@ -19,6 +23,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    { timestamps: false }
+    { timestamps: false } //* propiedad para eliminar los campos por default creados por la BD
   );
 };
