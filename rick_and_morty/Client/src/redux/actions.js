@@ -1,5 +1,5 @@
 import axios from "axios";
-import LoginForm from "../components/LoginForm/loginForm";
+
 export const ADD_FAV = "ADD_FAV";
 export const REMOVE_FAV = "REMOVE_FAV";
 export const ORDER = "ORDER";
@@ -7,19 +7,20 @@ export const FILTER = "FILTER";
 export const RESET = "RESET";
 
 export const addFavorite = (character) => {
-  try {
-    const endpoint = "http://localhost:3001/rickandmorty/fav";
-    return async (dispatch) => {
+  const endpoint = "http://localhost:3001/rickandmorty/fav";
+  return async (dispatch) => {
+    try {
       const { data } = await axios.post(endpoint, character);
       return dispatch({
         type: ADD_FAV,
         payload: data,
       });
-    };
-    // eslint-disable-next-line no-unreachable
-  } catch (error) {
-    console.log(error);
-  }
+
+      // eslint-disable-next-line no-unreachable
+    } catch (error) {
+      console.error(error);
+    }
+  };
 };
 
 export const removeFavorite = (id) => {

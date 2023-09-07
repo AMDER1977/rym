@@ -11,11 +11,13 @@ import NavBar from "./components/NavBar/NavBar";
 import ErrorPage from "./views/error/errorpage";
 import LandingPage from "./views/landingPage/landingPage.jsx";
 import Favorites from "./views/favorites/favorites";
+import LoginForm from "./components/LoginForm/loginForm";
 import "./App.css";
 
 function App() {
   const [characters, setCharacters] = useState([]);
   const [access, setAccess] = useState(false);
+  const URL = "http://localhost:3001/rickandmorty/login/";
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -27,11 +29,12 @@ function App() {
   async function login(userData) {
     try {
       const { email, password } = userData;
-      const URL = "http://localhost:3001/rickandmorty/login/";
-      const query = `?email=${email}&password=${password}`;
-      const { data } = await axios(URL + query);
+      //const query = `?email=${email}&password=${password}`;
+      const { data } = await axios(
+        URL + `?email=${email}&password=${password}`
+      );
       const { access } = data;
-      setAccess(data);
+      setAccess(access);
       access && navigate("/home");
     } catch (error) {
       return { error: error.message };
@@ -39,7 +42,7 @@ function App() {
   }
   useEffect(() => {
     !access && navigate("/");
-  }, [access]);
+  }, [access, navigate]);
 
   async function SearchHandler(id) {
     try {
@@ -96,7 +99,16 @@ function App() {
         <NavBar onSearch={SearchHandler} random={randomHandler} />
       )}
       <Routes>
-        <Route path="/" element={<LandingPage login={login} />} />
+        <Route
+          path="/"
+          element={
+            !access && location.pathname === "/" ? (
+              <LoginForm login={login} />
+            ) : (
+              <LandingPage login={login} />
+            )
+          }
+        />
         <Route
           path="/home"
           element={<Cards characters={characters} onClose={closeHandler} />}
